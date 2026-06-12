@@ -7,6 +7,7 @@ The standard usage happens like this, you load the CDN for the qr code generator
 Embed this in your the <head> or <body> of HTML file:
 
 ```js
+<link rel="stylesheet" href="https://viestatic.pages.dev/viestatic.css">
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 <script src="https://viestatic.pages.dev/viestatic.js"
         data-pos="3"
