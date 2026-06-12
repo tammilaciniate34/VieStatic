@@ -3,67 +3,230 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VieStatic Demo</title>
+  <title>VieStatic — QR Badge Demo & Docs</title>
 
-  <!-- VieStatic Styles -->
   <link rel="stylesheet" href="viestatic.css">
 
   <style>
     body {
       font-family: system-ui, sans-serif;
       margin: 0;
-      padding: 40px;
+      padding: 0;
       background: #f7f7f7;
       color: #222;
     }
 
-    h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
+    header {
+      background: #111;
+      color: #fff;
+      padding: 60px 40px;
+      text-align: center;
     }
 
-    p {
-      font-size: 16px;
-      max-width: 600px;
-      line-height: 1.6;
+    header h1 {
+      font-size: 42px;
+      margin: 0 0 10px;
     }
 
-    .demo-box {
-      margin-top: 40px;
+    header p {
+      font-size: 18px;
+      opacity: 0.85;
+    }
+
+    main {
+      padding: 40px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      margin-top: 50px;
+      font-size: 28px;
+    }
+
+    pre {
+      background: #111;
+      color: #0f0;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 14px;
+    }
+
+    .example-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      margin-top: 20px;
+    }
+
+    .live-demo {
+      margin-top: 20px;
       padding: 20px;
       background: #fff;
       border-radius: 12px;
       box-shadow: 0 4px 14px rgba(0,0,0,0.08);
     }
+
+    footer {
+      margin-top: 80px;
+      padding: 40px;
+      text-align: center;
+      color: #777;
+    }
   </style>
 </head>
 <body>
 
-  <h1>VieStatic Demo</h1>
+<header>
+  <h1>VieStatic</h1>
+  <p>A tiny floating QR badge for any website — powered by a CDN QR engine.</p>
+</header>
+
+<main>
+
+  <!-- INTRO -->
+  <h2>What is VieStatic?</h2>
   <p>
-    This page demonstrates the VieStatic floating QR badge.  
-    Click the badge to open the modal and scan the QR code.
+    VieStatic adds a small floating badge to your website.  
+    When clicked, it opens a modal showing a QR code for the current page.  
+    Perfect for sharing, mobile testing, or handing off URLs quickly.
   </p>
 
-  <div class="demo-box">
-    <p>
-      You can customize the badge position using:
-      <code>data-pos="1|2|3|4"</code>
-    </p>
-    <p>
-      You can also override the URL using:
-      <code>data-url="https://example.com"</code>
-    </p>
+  <!-- BASIC USAGE -->
+  <h2>Basic Usage</h2>
+  <p>Load the QR engine from a CDN, then load <code>viestatic.js</code>:</p>
+
+  <pre>&lt;script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"&gt;&lt;/script&gt;
+&lt;script src="viestatic.js"
+        data-pos="3"
+        data-url=""&gt;
+&lt;/script&gt;</pre>
+
+  <div class="example-box">
+    <strong>Live demo:</strong>  
+    This page is using the exact snippet above.
   </div>
 
-  <!-- QR Engine (must load BEFORE viestatic.js) -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+  <!-- POSITIONS -->
+  <h2>Badge Positions</h2>
+  <p>Use <code>data-pos</code> to choose where the badge appears:</p>
 
-  <!-- VieStatic -->
-  <script src="viestatic.js"
-          data-pos="3"
-          data-url="">
+  <pre>
+1 = bottom-right  
+2 = bottom-left  
+3 = top-right  
+4 = top-left
+  </pre>
+
+  <pre>&lt;script src="viestatic.js" data-pos="1"&gt;&lt;/script&gt;</pre>
+
+  <div class="example-box">
+    <strong>Try it:</strong>  
+    Change <code>data-pos</code> in this page and refresh.
+  </div>
+
+  <!-- CUSTOM URL -->
+  <h2>Custom URL</h2>
+  <p>
+    By default, VieStatic uses <code>window.location.href</code>.  
+    You can override it:
+  </p>
+
+  <pre>&lt;script src="viestatic.js"
+        data-url="https://example.com"
+        data-pos="2"&gt;
+&lt;/script&gt;</pre>
+
+  <div class="example-box">
+    <strong>Tip:</strong>  
+    Great for linking to documentation, downloads, or alternate pages.
+  </div>
+
+  <!-- JS API -->
+  <h2>JavaScript API</h2>
+  <p>
+    You can also create badges manually using <code>VieStatic.init()</code>.
+  </p>
+
+  <pre>
+&lt;script&gt;
+  VieStatic.init({
+    url: "https://mysite.com/docs",
+    position: 4
+  });
+&lt;/script&gt;
+  </pre>
+
+  <div class="example-box">
+    <strong>Use case:</strong>  
+    Dynamically generate QR badges for SPA routes.
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <h2>How It Works</h2>
+  <p>
+    VieStatic uses:
+  </p>
+
+  <ul>
+    <li>A floating badge injected into the DOM</li>
+    <li>A modal overlay with a canvas QR code</li>
+    <li>The <code>qrcode-generator</code> library from a CDN</li>
+    <li>Zero dependencies beyond that</li>
+  </ul>
+
+  <pre>
+[Badge] → click → [Modal] → [QR Canvas] → scan → done
+  </pre>
+
+  <!-- LIVE DEMO -->
+  <h2>Live QR Preview</h2>
+  <p>Below is a live QR code generated using the same CDN engine:</p>
+
+  <div class="live-demo" id="live-demo"></div>
+
+  <script>
+    // Live demo QR
+    const demo = document.getElementById("live-demo");
+    const qr = qrcode(0, "L");
+    qr.addData("https://example.com/demo");
+    qr.make();
+
+    const count = qr.getModuleCount();
+    const scale = 4;
+
+    const canvas = document.createElement("canvas");
+    canvas.width = canvas.height = count * scale;
+    const ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#000";
+    for (let r = 0; r < count; r++) {
+      for (let c = 0; c < count; c++) {
+        if (qr.isDark(r, c)) {
+          ctx.fillRect(c * scale, r * scale, scale, scale);
+        }
+      }
+    }
+
+    demo.appendChild(canvas);
   </script>
+
+</main>
+
+<footer>
+  VieStatic — lightweight, elegant, and open.
+</footer>
+
+<!-- QR Engine -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+
+<!-- VieStatic -->
+<script src="viestatic.js" data-pos="3"></script>
 
 </body>
 </html>
