@@ -52,3 +52,7 @@ MIT license, feel free to remix/contribute.
 <img width="79" height="89" alt="Screenshot 2026-06-12 at 11 02 07 AM" src="https://github.com/user-attachments/assets/fe8b2262-17a0-413c-b359-ec79e1ac1781" /> (watch what happens when you click the button with the preview below!)
 <img width="358" height="337" alt="Screenshot 2026-06-12 at 11 03 28 AM" src="https://github.com/user-attachments/assets/51ed878a-e328-4d2b-b37f-f66452c77bb9" />
 
+Note: Refer to SECURITY.md for instructions for bug/security reporting. 
+Nota: Consulte SECURITY.md para obtener instrucciones sobre cómo reportar errores o problemas de seguridad.
+Remarque : Consultez le fichier SECURITY.md pour savoir comment signaler des bugs ou des problèmes de sécurité.
+
