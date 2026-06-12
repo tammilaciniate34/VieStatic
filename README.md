@@ -41,7 +41,10 @@ Then move the VieStatic installation into your project. Then embed this code blo
 (The guide above assumes your VieStatic installation is in /assets, you may change it accordingly. data pos rules still apply)
 
 ## A quick tip
-If you want to change the link of the qrcode to something else, change data-url to your desired url.
+If you want to change the link of the qrcode to something else, change data-url to your desired url. 
+
+## A test to see how VieStatic plays out.
+The offical site already features VieStatic, but if you want to see a bit more visit [here.](https://test-for-viestatic.pages.dev/)
 
 ## Tech stack
 The website is composed of cdn for qr-code-generator, html/css/js, and no other libs/frameworks except cdn for qr-code-generator. A quick note, npm package for VieStatic has been added (you can install with npm install viestatic). Try it out. Explore. 
