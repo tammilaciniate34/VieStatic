@@ -1,145 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VieStatic — Instant QR Badge for Any Website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VieStatic Demo</title>
 
-    <!-- VieStatic Styles -->
-    <link rel="stylesheet" href="viestatic.css">
+  <!-- VieStatic Styles -->
+  <link rel="stylesheet" href="viestatic.css">
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: system-ui, sans-serif;
-            background: #0d0d0d;
-            color: #fff;
-            line-height: 1.6;
-        }
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 40px;
+      background: #f7f7f7;
+      color: #222;
+    }
 
-        header {
-            padding: 60px 20px;
-            text-align: center;
-        }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
 
-        h1 {
-            font-size: 48px;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
+    p {
+      font-size: 16px;
+      max-width: 600px;
+      line-height: 1.6;
+    }
 
-        h2 {
-            margin-top: 40px;
-            font-size: 28px;
-            font-weight: 600;
-        }
-
-        p {
-            max-width: 700px;
-            margin: 0 auto 20px;
-            font-size: 18px;
-            color: #ccc;
-        }
-
-        .code-block {
-            background: #1a1a1a;
-            padding: 16px;
-            border-radius: 10px;
-            max-width: 700px;
-            margin: 20px auto;
-            font-family: monospace;
-            font-size: 15px;
-            overflow-x: auto;
-            border: 1px solid #333;
-        }
-
-        footer {
-            margin-top: 80px;
-            padding: 40px;
-            text-align: center;
-            color: #777;
-            font-size: 14px;
-        }
-
-        .demo-box {
-            margin: 40px auto;
-            padding: 30px;
-            background: #111;
-            border-radius: 12px;
-            max-width: 700px;
-            border: 1px solid #222;
-            text-align: center;
-        }
-
-        .demo-box p {
-            color: #aaa;
-        }
-    </style>
+    .demo-box {
+      margin-top: 40px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+  </style>
 </head>
 <body>
 
-<header>
-    <h1>VieStatic</h1>
-    <p>The simplest way to add a floating QR badge to any website — with one line of JavaScript.</p>
-</header>
+  <h1>VieStatic Demo</h1>
+  <p>
+    This page demonstrates the VieStatic floating QR badge.  
+    Click the badge to open the modal and scan the QR code.
+  </p>
 
-<section>
-    <h2 style="text-align:center;">Live Demo</h2>
-    <div class="demo-box">
-        <p>This page is running VieStatic right now.</p>
-        <p>Look at the corner — click the floating badge to open the QR modal.</p>
-    </div>
-</section>
+  <div class="demo-box">
+    <p>
+      You can customize the badge position using:
+      <code>data-pos="1|2|3|4"</code>
+    </p>
+    <p>
+      You can also override the URL using:
+      <code>data-url="https://example.com"</code>
+    </p>
+  </div>
 
-<section>
-    <h2 style="text-align:center;">Install</h2>
-    <p>Drop this script anywhere in your HTML. That’s it.</p>
+  <!-- QR Engine (must load BEFORE viestatic.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 
-    <div class="code-block">
-        &lt;link rel="stylesheet" href="viestatic.css"&gt;<br>
-        &lt;script src="viestatic.js" data-pos="3"&gt;&lt;/script&gt;
-    </div>
-
-    <p><strong>Positions:</strong></p>
-    <div class="code-block">
-        1 = top-left<br>
-        2 = bottom-left<br>
-        3 = top-right<br>
-        4 = bottom-right
-    </div>
-</section>
-
-<section>
-    <h2 style="text-align:center;">Custom URL</h2>
-    <p>By default, VieStatic uses the current page URL.  
-       You can override it:</p>
-
-    <div class="code-block">
-        &lt;script src="viestatic.js" data-pos="4" data-url="https://example.com"&gt;&lt;/script&gt;
-    </div>
-</section>
-
-<section>
-    <h2 style="text-align:center;">JavaScript API</h2>
-    <p>You can also initialize VieStatic manually:</p>
-
-    <div class="code-block">
-        &lt;script&gt;<br>
-        &nbsp;&nbsp;VieStatic.init({<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;url: "https://example.com",<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;position: 1<br>
-        &nbsp;&nbsp;});<br>
-        &lt;/script&gt;
-    </div>
-</section>
-
-<footer>
-    VieStatic — Built for the web.  
-</footer>
-
-<!-- VieStatic Script -->
-<script src="viestatic.js" data-pos="3"></script>
+  <!-- VieStatic -->
+  <script src="viestatic.js"
+          data-pos="3"
+          data-url="">
+  </script>
 
 </body>
 </html>
