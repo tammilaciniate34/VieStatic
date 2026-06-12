@@ -1,68 +1,42 @@
 /* ---------------------------------------------------------
-   Badge (floating QR button)
+   Badge (floating button)
 --------------------------------------------------------- */
-
-.vs-badge,
-.vs-modal-backdrop {
-  box-sizing: border-box;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
 
 .vs-badge {
   position: fixed;
-  z-index: 99999;
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.82);
-  color: #fff;
+  width: 52px;
+  height: 52px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  cursor: pointer;
+  z-index: 999999;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-  transition: transform 0.18s ease-out, box-shadow 0.18s ease-out, background 0.18s ease-out;
+  transition: transform .18s ease, box-shadow .18s ease;
 }
 
 .vs-badge:hover {
-  transform: translateY(-1px) scale(1.05);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
-  background: rgba(0, 0, 0, 0.92);
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.22);
 }
 
 .vs-badge-icon {
-  width: 22px;
-  height: 22px;
-  position: relative;
+  width: 26px;
+  height: 26px;
+  background: #000;
+  mask-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" fill="black" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h6v6H3V3zm2 2v2h2V5H5zm10-2h6v6h-6V3zm2 2v2h2V5h-2zM3 15h6v6H3v-6zm2 2v2h2v-2H5zm10-2h6v6h-6v-6zm2 2v2h2v-2h-2z"/></svg>');
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
 }
 
-.vs-badge-icon::before,
-.vs-badge-icon::after {
-  content: "";
-  position: absolute;
-  border: 2px solid #fff;
-  border-radius: 3px;
-}
-
-.vs-badge-icon::before {
-  inset: 0;
-}
-
-.vs-badge-icon::after {
-  inset: 6px;
-  border-top: none;
-  border-left: none;
-  opacity: 0.9;
-}
-
-/* ---------------------------------------------------------
-   Badge Positions
---------------------------------------------------------- */
-
-.vs-pos-1 { top: 16px; left: 16px; }
-.vs-pos-2 { bottom: 16px; left: 16px; }
-.vs-pos-3 { top: 16px; right: 16px; }
-.vs-pos-4 { bottom: 16px; right: 16px; }
+/* Badge positions */
+.vs-pos-1 { bottom: 24px; right: 24px; }
+.vs-pos-2 { bottom: 24px; left: 24px; }
+.vs-pos-3 { top: 24px; right: 24px; }
+.vs-pos-4 { top: 24px; left: 24px; }
 
 /* ---------------------------------------------------------
    Modal Backdrop
@@ -71,12 +45,18 @@
 .vs-modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(3px);
+  z-index: 999998;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100000;
-  animation: vs-fade-in 0.18s ease-out;
+  animation: vsFadeIn .18s ease;
+}
+
+@keyframes vsFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* ---------------------------------------------------------
@@ -84,71 +64,65 @@
 --------------------------------------------------------- */
 
 .vs-modal {
-  background: #111;
-  color: #fff;
+  width: 320px;
+  max-width: 90%;
+  background: #ffffff;
   border-radius: 14px;
-  padding: 18px 18px 16px;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
-  max-width: 320px;
-  width: 100%;
-  text-align: center;
-  animation: vs-pop-in 0.18s ease-out;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
   position: relative;
+  animation: vsPop .22s cubic-bezier(.18,.89,.32,1.28);
 }
 
-.vs-modal-title {
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 10px;
+@keyframes vsPop {
+  from { transform: scale(.85); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
 }
 
-.vs-modal-url {
-  font-size: 11px;
-  color: #aaa;
-  word-break: break-all;
-  margin-bottom: 12px;
-}
-
-.vs-modal-qr {
-  background: #fff;
-  padding: 10px;
-  border-radius: 10px;
-  display: inline-block;
-}
-
-.vs-modal-footer {
-  margin-top: 10px;
-  font-size: 11px;
-  color: #888;
-}
-
-/* ---------------------------------------------------------
-   Close Button
---------------------------------------------------------- */
-
+/* Close button */
 .vs-modal-close {
   position: absolute;
   top: 10px;
   right: 12px;
-  font-size: 18px;
-  color: #aaa;
+  font-size: 26px;
+  line-height: 26px;
   cursor: pointer;
+  color: #444;
+  transition: color .15s ease;
 }
 
 .vs-modal-close:hover {
-  color: #fff;
+  color: #000;
 }
 
-/* ---------------------------------------------------------
-   Animations
---------------------------------------------------------- */
-
-@keyframes vs-fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* Title */
+.vs-modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  text-align: center;
+  color: #111;
 }
 
-@keyframes vs-pop-in {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+/* URL text */
+.vs-modal-url {
+  font-size: 13px;
+  color: #444;
+  text-align: center;
+  margin-bottom: 14px;
+  word-break: break-all;
+}
+
+/* QR container */
+.vs-modal-qr {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+/* Footer */
+.vs-modal-footer {
+  text-align: center;
+  font-size: 12px;
+  color: #777;
 }
