@@ -1,0 +1,154 @@
+/* ---------------------------------------------------------
+   Badge (floating QR button)
+--------------------------------------------------------- */
+
+.vs-badge,
+.vs-modal-backdrop {
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.vs-badge {
+  position: fixed;
+  z-index: 99999;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.82);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  transition: transform 0.18s ease-out, box-shadow 0.18s ease-out, background 0.18s ease-out;
+}
+
+.vs-badge:hover {
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.92);
+}
+
+.vs-badge-icon {
+  width: 22px;
+  height: 22px;
+  position: relative;
+}
+
+.vs-badge-icon::before,
+.vs-badge-icon::after {
+  content: "";
+  position: absolute;
+  border: 2px solid #fff;
+  border-radius: 3px;
+}
+
+.vs-badge-icon::before {
+  inset: 0;
+}
+
+.vs-badge-icon::after {
+  inset: 6px;
+  border-top: none;
+  border-left: none;
+  opacity: 0.9;
+}
+
+/* ---------------------------------------------------------
+   Badge Positions
+--------------------------------------------------------- */
+
+.vs-pos-1 { top: 16px; left: 16px; }
+.vs-pos-2 { bottom: 16px; left: 16px; }
+.vs-pos-3 { top: 16px; right: 16px; }
+.vs-pos-4 { bottom: 16px; right: 16px; }
+
+/* ---------------------------------------------------------
+   Modal Backdrop
+--------------------------------------------------------- */
+
+.vs-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100000;
+  animation: vs-fade-in 0.18s ease-out;
+}
+
+/* ---------------------------------------------------------
+   Modal Window
+--------------------------------------------------------- */
+
+.vs-modal {
+  background: #111;
+  color: #fff;
+  border-radius: 14px;
+  padding: 18px 18px 16px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+  max-width: 320px;
+  width: 100%;
+  text-align: center;
+  animation: vs-pop-in 0.18s ease-out;
+  position: relative;
+}
+
+.vs-modal-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.vs-modal-url {
+  font-size: 11px;
+  color: #aaa;
+  word-break: break-all;
+  margin-bottom: 12px;
+}
+
+.vs-modal-qr {
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.vs-modal-footer {
+  margin-top: 10px;
+  font-size: 11px;
+  color: #888;
+}
+
+/* ---------------------------------------------------------
+   Close Button
+--------------------------------------------------------- */
+
+.vs-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 18px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.vs-modal-close:hover {
+  color: #fff;
+}
+
+/* ---------------------------------------------------------
+   Animations
+--------------------------------------------------------- */
+
+@keyframes vs-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes vs-pop-in {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
