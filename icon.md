@@ -9,6 +9,6 @@ Rules
 * Submit icon as a pull request
 * Keep everything PG
 * I accept PNG/JPEG/HEIC
-* Include your email addresss and your github username (username is optional)
+* Include your GitHub username so I can contact you if you win. 
 * All submissions are due by 8/17/26
 * HAVE FUN!
