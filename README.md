@@ -60,3 +60,5 @@ Note: Refer to SECURITY.md for instructions for bug/security reporting.
 Nota: Consulte SECURITY.md para obtener instrucciones sobre cómo reportar errores o problemas de seguridad.
 Remarque : Consultez le fichier SECURITY.md pour savoir comment signaler des bugs ou des problèmes de sécurité.
 
+**BE SURE TO SIGN UP FOR THE ICON COMPETITON. VISIT ICON.MD FOR INSTRUCTIONS!**
+
