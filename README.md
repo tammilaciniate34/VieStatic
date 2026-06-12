@@ -37,7 +37,7 @@ Then move the VieStatic installation into your project. Then embed this code blo
         data-url="">
 </script>
 ```
-(The guide above assumes your viestatic installation is in /assets, you may change it accordingly. data pos rules still apply)
+(The guide above assumes your VieStatic installation is in /assets, you may change it accordingly. data pos rules still apply)
 
 ## A quick tip
 If you want to change the link of the qrcode to something else, change data-url to your desired url.
