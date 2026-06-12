@@ -107,7 +107,7 @@
 
     const footer = document.createElement("div");
     footer.className = "vs-modal-footer";
-    footer.textContent = "Powered by <a href="https://viestatic.pages.dev/">VieStatic</a>";
+    footer.textContent = "Powered by VieStatic by GitHub user live-by-unix";
 
     modal.appendChild(close);
     modal.appendChild(title);
