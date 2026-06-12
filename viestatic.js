@@ -1,7 +1,7 @@
 (function () {
 
   /* ---------------------------------------------------------
-   * QR Math (Galois field operations)
+   * QR Math (Galois field)
    * --------------------------------------------------------- */
 
   const QRMath = {
@@ -35,12 +35,12 @@
   }
 
   /* ---------------------------------------------------------
-   * Polynomial for Reed–Solomon
+   * Polynomial (for Reed–Solomon)
    * --------------------------------------------------------- */
 
   class QRPolynomial {
     constructor(num, shift) {
-      if (!num.length) throw new Error("no num");
+      if (!num || !num.length) throw new Error("no num");
       let offset = 0;
       while (offset < num.length && num[offset] === 0) offset++;
       this.num = new Array(num.length - offset + shift);
@@ -81,7 +81,7 @@
   }
 
   /* ---------------------------------------------------------
-   * RS Block (Reed–Solomon block info)
+   * RS Block
    * --------------------------------------------------------- */
 
   class QRRSBlock {
@@ -90,68 +90,11 @@
       this.dataCount = dataCount;
     }
 
-    static getRSBlocks(typeNumber, errorCorrectLevel) {
-      // We’ll support a reasonable range of versions and ECC levels.
-      // For VieStatic, we mostly care about URLs, so versions 1–10 are enough.
-      const RS_BLOCK_TABLE = [
-        // 1
-        [1, 26, 19], // L
-        [1, 26, 16], // M
-        [1, 26, 13], // Q
-        [1, 26, 9],  // H
-        // 2
-        [1, 44, 34],
-        [1, 44, 28],
-        [1, 44, 22],
-        [1, 44, 16],
-        // 3
-        [1, 70, 55],
-        [1, 70, 44],
-        [2, 35, 17],
-        [2, 35, 13],
-        // 4
-        [1, 100, 80],
-        [2, 50, 32],
-        [2, 50, 24],
-        [4, 25, 9],
-        // 5
-        [1, 134, 108],
-        [2, 67, 43],
-        [2, 33, 15, 2, 34, 16],
-        [2, 33, 11, 2, 34, 12],
-        // 6
-        [2, 86, 68],
-        [4, 43, 27],
-        [4, 43, 19],
-        [4, 43, 15],
-        // 7
-        [2, 98, 78],
-        [4, 49, 31],
-        [2, 32, 14, 4, 33, 15],
-        [4, 39, 13, 1, 40, 14],
-        // 8
-        [2, 121, 97],
-        [2, 60, 38, 2, 61, 39],
-        [4, 40, 18, 2, 41, 19],
-        [4, 40, 14, 2, 41, 15],
-        // 9
-        [2, 146, 116],
-        [3, 58, 36, 2, 59, 37],
-        [4, 36, 16, 4, 37, 17],
-        [4, 36, 12, 4, 37, 13],
-        // 10
-        [2, 86, 68, 2, 87, 69],
-        [4, 69, 43, 1, 70, 44],
-        [6, 43, 19, 2, 44, 20],
-        [6, 43, 15, 2, 44, 16]
-      ];
-
-      const EC_LEVEL_MAP = { L: 0, M: 1, Q: 2, H: 3 };
-      const ecIndex = EC_LEVEL_MAP[errorCorrectLevel] ?? 0;
-
-      const index = (typeNumber - 1) * 4 + ecIndex;
-      const rsData = RS_BLOCK_TABLE[index];
-      if (!rsData) throw new Error("No RS block for type " + typeNumber);
+    static getRSBlocks(typeNumber, ecLevel) {
+      const table = QRRSBlock.RS_BLOCK_TABLE;
+      const idx = (typeNumber - 1) * 4 + ecLevel;
+      const rsData = table[idx];
+      if (!rsData) throw new Error("no RS block for type " + typeNumber);
 
       const list = [];
       if (rsData.length === 3) {
@@ -160,7 +103,6 @@
           list.push(new QRRSBlock(total, data));
         }
       } else {
-        // pattern: count1, total1, data1, count2, total2, data2
         const [c1, t1, d1, c2, t2, d2] = rsData;
         for (let i = 0; i < c1; i++) list.push(new QRRSBlock(t1, d1));
         for (let i = 0; i < c2; i++) list.push(new QRRSBlock(t2, d2));
@@ -168,6 +110,30 @@
       return list;
     }
   }
+
+  // Versions 1–10, EC levels L(0), M(1), Q(2), H(3)
+  QRRSBlock.RS_BLOCK_TABLE = [
+    // 1
+    [1, 26, 19], [1, 26, 16], [1, 26, 13], [1, 26, 9],
+    // 2
+    [1, 44, 34], [1, 44, 28], [1, 44, 22], [1, 44, 16],
+    // 3
+    [1, 70, 55], [1, 70, 44], [2, 35, 17], [2, 35, 13],
+    // 4
+    [1, 100, 80], [2, 50, 32], [2, 50, 24], [4, 25, 9],
+    // 5
+    [1, 134, 108], [2, 67, 43], [2, 33, 15, 2, 34, 16], [2, 33, 11, 2, 34, 12],
+    // 6
+    [2, 86, 68], [4, 43, 27], [4, 43, 19], [4, 43, 15],
+    // 7
+    [2, 98, 78], [4, 49, 31], [2, 32, 14, 4, 33, 15], [4, 39, 13, 1, 40, 14],
+    // 8
+    [2, 121, 97], [2, 60, 38, 2, 61, 39], [4, 40, 18, 2, 41, 19], [4, 40, 14, 2, 41, 15],
+    // 9
+    [2, 146, 116], [3, 58, 36, 2, 59, 37], [4, 36, 16, 4, 37, 17], [4, 36, 12, 4, 37, 13],
+    // 10
+    [2, 86, 68, 2, 87, 69], [4, 69, 43, 1, 70, 44], [6, 43, 19, 2, 44, 20], [6, 43, 15, 2, 44, 16]
+  ];
 
   /* ---------------------------------------------------------
    * Bit buffer
@@ -203,12 +169,12 @@
   }
 
   /* ---------------------------------------------------------
-   * 8-bit data
+   * 8‑bit data
    * --------------------------------------------------------- */
 
   class QR8bitByte {
     constructor(data) {
-      this.mode = 4; // 8-bit byte mode
+      this.mode = 4; // 8‑bit byte mode
       this.data = data;
     }
 
@@ -224,7 +190,7 @@
   }
 
   /* ---------------------------------------------------------
-   * Utility functions (BCH, patterns, etc.)
+   * Utility (patterns, BCH, mask)
    * --------------------------------------------------------- */
 
   const QRUtil = {
@@ -306,7 +272,7 @@
   class QRCode {
     constructor(typeNumber, errorCorrectLevel) {
       this.typeNumber = typeNumber;
-      this.errorCorrectLevel = errorCorrectLevel; // 'L','M','Q','H'
+      this.errorCorrectLevel = errorCorrectLevel; // 0=L,1=M,2=Q,3=H
       this.modules = null;
       this.moduleCount = 0;
       this.dataList = [];
@@ -326,7 +292,7 @@
     }
 
     make() {
-      // Try increasing typeNumber until data fits
+      // Try increasing type until data fits
       for (let type = this.typeNumber; type <= 10; type++) {
         this.typeNumber = type;
         if (this._tryMake()) return;
@@ -337,8 +303,8 @@
     _tryMake() {
       this.moduleCount = this.typeNumber * 4 + 17;
       this.modules = new Array(this.moduleCount);
-      for (let row = 0; row < this.moduleCount; row++) {
-        this.modules[row] = new Array(this.moduleCount).fill(null);
+      for (let r = 0; r < this.moduleCount; r++) {
+        this.modules[r] = new Array(this.moduleCount).fill(null);
       }
 
       this._setupPositionProbePattern(0, 0);
@@ -347,7 +313,6 @@
       this._setupPositionAdjustPattern();
       this._setupTimingPattern();
       this._setupTypeNumber();
-      // type info + mask will be set after data mapping
 
       const data = this._createData();
       let bestMask = 0;
@@ -355,26 +320,29 @@
 
       for (let mask = 0; mask < 8; mask++) {
         this._mapData(data, mask);
-        const lostPoint = this._getLostPoint();
-        if (lostPoint < minLostPoint) {
-          minLostPoint = lostPoint;
+        const lost = this._getLostPoint();
+        if (lost < minLostPoint) {
+          minLostPoint = lost;
           bestMask = mask;
         }
-        // reset modules except function patterns
+        // reset non-function modules
         for (let r = 0; r < this.moduleCount; r++) {
           for (let c = 0; c < this.moduleCount; c++) {
-            if (this.modules[r][c] !== null && this.modules[r][c].fixed) {
-              this.modules[r][c] = this.modules[r][c].value;
-            } else if (this.modules[r][c] !== null && this.modules[r][c].func) {
+            if (this.modules[r][c] !== null && this.modules[r][c].func) {
               this.modules[r][c] = this.modules[r][c].value;
             } else {
               this.modules[r][c] = null;
             }
           }
         }
+        this._setupPositionProbePattern(0, 0);
+        this._setupPositionProbePattern(this.moduleCount - 7, 0);
+        this._setupPositionProbePattern(0, this.moduleCount - 7);
+        this._setupPositionAdjustPattern();
+        this._setupTimingPattern();
+        this._setupTypeNumber();
       }
 
-      // Final mapping with best mask
       this._mapData(data, bestMask);
       this._setupTypeInfo(bestMask);
       return true;
@@ -382,9 +350,9 @@
 
     _setupPositionProbePattern(row, col) {
       for (let r = -1; r <= 7; r++) {
-        if (row + r <= -1 || this.moduleCount <= row + r) continue;
+        if (row + r < 0 || row + r >= this.moduleCount) continue;
         for (let c = -1; c <= 7; c++) {
-          if (col + c <= -1 || this.moduleCount <= col + c) continue;
+          if (col + c < 0 || col + c >= this.moduleCount) continue;
           const isDark =
             (0 <= r && r <= 6 && (c === 0 || c === 6)) ||
             (0 <= c && c <= 6 && (r === 0 || r === 6)) ||
@@ -436,8 +404,9 @@
     }
 
     _setupTypeInfo(maskPattern) {
-      const EC_LEVEL_MAP = { L: 1, M: 0, Q: 3, H: 2 };
-      const ecBits = EC_LEVEL_MAP[this.errorCorrectLevel] ?? 1;
+      // map EC level to bits like original spec: L=1, M=0, Q=3, H=2
+      const ecBitsMap = [1, 0, 3, 2];
+      const ecBits = ecBitsMap[this.errorCorrectLevel] ?? 1;
       const data = (ecBits << 3) | maskPattern;
       const bits = QRUtil.getBCHTypeInfo(data);
 
@@ -474,17 +443,17 @@
 
       for (let i = 0; i < this.dataList.length; i++) {
         const data = this.dataList[i];
-        buffer.put(4, 4); // mode: 8-bit byte
+        buffer.put(4, 4); // mode: 8‑bit byte
         buffer.put(data.getLength(), 8);
         data.write(buffer);
       }
 
-      // terminator
       let totalDataCount = 0;
       for (let i = 0; i < rsBlocks.length; i++) {
         totalDataCount += rsBlocks[i].dataCount;
       }
 
+      // terminator
       if (buffer.length + 4 <= totalDataCount * 8) {
         buffer.put(0, 4);
       }
@@ -503,22 +472,30 @@
         padFlag = !padFlag;
       }
 
-      // split into blocks
-      const dataBytes = new Array(totalDataCount);
-      for (let i = 0; i < dataBytes.length; i++) {
-        dataBytes[i] = 0;
-      }
-      for (let i = 0; i < buffer.length; i++) {
-        dataBytes[Math.floor(i / 8)] |= (buffer.get(i) ? (0x80 >>> (i % 8)) : 0);
+      // convert bit buffer to bytes
+      const dataBytes = [];
+      for (let i = 0; i < buffer.length; i += 8) {
+        let b = 0;
+        for (let j = 0; j < 8; j++) {
+          if (buffer.get(i + j)) {
+            b |= (0x80 >>> j);
+          }
+        }
+        dataBytes.push(b);
       }
 
       let offset = 0;
       const dcdata = [];
       const ecdata = [];
+      let maxDcCount = 0;
+      let maxEcCount = 0;
 
       for (let r = 0; r < rsBlocks.length; r++) {
         const dcCount = rsBlocks[r].dataCount;
         const ecCount = rsBlocks[r].totalCount - dcCount;
+
+        maxDcCount = Math.max(maxDcCount, dcCount);
+        maxEcCount = Math.max(maxEcCount, ecCount);
 
         const dc = new Array(dcCount);
         for (let i = 0; i < dcCount; i++) {
@@ -543,9 +520,6 @@
       const totalCodeCount = rsBlocks.reduce((sum, b) => sum + b.totalCount, 0);
       const dataOut = new Array(totalCodeCount);
       let idx = 0;
-
-      const maxDcCount = Math.max(...dcdata.map(d => d.length));
-      const maxEcCount = Math.max(...ecdata.map(e => e.length));
 
       for (let i = 0; i < maxDcCount; i++) {
         for (let r = 0; r < rsBlocks.length; r++) {
@@ -595,7 +569,7 @@
               if (QRUtil.getMask(maskPattern, r, cc)) {
                 dark = !dark;
               }
-              this.modules[r][cc] = { value: dark, fixed: true };
+              this.modules[r][cc] = dark;
               bitIndex++;
               if (bitIndex === 8) {
                 byteIndex++;
@@ -604,7 +578,7 @@
             }
           }
           row += inc;
-          if (row < 0 || this.moduleCount <= row) {
+          if (row < 0 || row >= this.moduleCount) {
             row -= inc;
             inc = -inc;
             break;
@@ -617,15 +591,15 @@
       const moduleCount = this.moduleCount;
       let lostPoint = 0;
 
-      // Adjacent modules in row/column
+      // Adjacent modules
       for (let row = 0; row < moduleCount; row++) {
         for (let col = 0; col < moduleCount; col++) {
           let sameCount = 0;
           const dark = this.isDark(row, col);
           for (let r = -1; r <= 1; r++) {
-            if (row + r < 0 || moduleCount <= row + r) continue;
+            if (row + r < 0 || row + r >= moduleCount) continue;
             for (let c = -1; c <= 1; c++) {
-              if (col + c < 0 || moduleCount <= col + c) continue;
+              if (col + c < 0 || col + c >= moduleCount) continue;
               if (r === 0 && c === 0) continue;
               if (dark === this.isDark(row + r, col + c)) sameCount++;
             }
@@ -650,7 +624,7 @@
         }
       }
 
-      // Finder-like patterns in rows
+      // Finder-like patterns (rows)
       for (let row = 0; row < moduleCount; row++) {
         for (let col = 0; col < moduleCount - 6; col++) {
           if (
@@ -667,7 +641,7 @@
         }
       }
 
-      // Finder-like patterns in columns
+      // Finder-like patterns (cols)
       for (let col = 0; col < moduleCount; col++) {
         for (let row = 0; row < moduleCount - 6; row++) {
           if (
@@ -684,7 +658,7 @@
         }
       }
 
-      // Dark module ratio
+      // Dark ratio
       let darkCount = 0;
       for (let row = 0; row < moduleCount; row++) {
         for (let col = 0; col < moduleCount; col++) {
@@ -699,13 +673,9 @@
       return lostPoint;
     }
   }
-
-  /* ---------------------------------------------------------
-   * Helper: create QR canvas for a given text + size
-   * --------------------------------------------------------- */
-
   function VS_createQRCanvas(text, size) {
-    const qr = new QRCode(4, "L"); // start at version 4, ECC L
+    // Create QRCode instance starting at version 4, ECC level L (0)
+    const qr = new QRCode(4, 0);
     qr.addData(text);
     qr.make();
 
@@ -714,12 +684,12 @@
 
     const canvas = document.createElement("canvas");
     canvas.width = canvas.height = count * scale;
-    const ctx = canvas.getContext("2d");
 
+    const ctx = canvas.getContext("2d");
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#000000";
 
+    ctx.fillStyle = "#000000";
     for (let r = 0; r < count; r++) {
       for (let c = 0; c < count; c++) {
         if (qr.isDark(r, c)) {
@@ -795,10 +765,6 @@
     backdrop.appendChild(modal);
     document.body.appendChild(backdrop);
   }
-    /* ---------------------------------------------------------
-   * VieStatic Init — Auto-detect <script> tag
-   * --------------------------------------------------------- */
-
   function VS_detectScriptTag() {
     // Prefer currentScript when available
     if (document.currentScript) return document.currentScript;
@@ -825,7 +791,7 @@
   }
 
   /* ---------------------------------------------------------
-   * VieStatic Global API
+   * Global API
    * --------------------------------------------------------- */
 
   window.VieStatic = {
@@ -848,5 +814,7 @@
     VS_autoInit();
   }
 
-})(); 
+})();  
+
+
 
