@@ -46,7 +46,15 @@ Also, VieStatic witll audo adapt to the same font you use for your website.
 
 
 ## Tech stack
-The website is composed of cdn for qr-code-generator, html/css/js, and no other libs/frameworks except cdn for qr-code-generator. A quick note, npm package for VieStatic has been added (you can install with npm install viestatic). Try it out. Explore. 
+The website is composed of cdn for qr-code-generator, html/css/js, and no other libs/frameworks except cdn for qr-code-generator. Explore.
+
+## NPM
+install with:
+```bash
+npm install viestatic
+```
+Package:
+```https://www.npmjs.com/package/viestatic```
 
 ## Licensing
 MIT license, feel free to remix/contribute. 
