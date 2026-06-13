@@ -1,3 +1,4 @@
+[![npm version](https://img.shields.io/npm/v/viestatic.svg)](https://www.npmjs.com/package/viestatic) [![npm downloads](https://img.shields.io/npm/dm/viestatic.svg)](https://www.npmjs.com/package/viestatic) [![license MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/live-by-unix/VieStatic/blob/main/LICENSE)
 ## VieStatic 
 Embed a scannable QR code in ANY website with VieStatic.  
 **This README covers usage, usage for installation, tech stack, and licensing, along with previews.**  
