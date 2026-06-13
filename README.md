@@ -1,44 +1,82 @@
 ## VieStatic 
 Embed a scanable QR code in ANY website with VieStatic.  
 **This README covers usage, usage for installation, tech stack, and licensing, along with previews.**  
+## Installation (CDN)
 
-## Standard Usage
-The standard usage happens like this, you load the CDN for the qr code generator, then you load the CDN for VieStatic.  
-Embed this in your the <head> or <body> of HTML file:
+Add the following code to the `<head>` or '<body>' section of your HTML document:
 
-```js
+```html
 <link rel="stylesheet" href="https://viestatic.pages.dev/viestatic.css">
+
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+
 <script src="https://viestatic.pages.dev/viestatic.js"
         data-pos="3"
         data-url="">
 </script>
 ```
-See in data-pos the little number which equals 3. You can change that to change the placement of the button!
-The different locations are...
-* 1 is bottom right
-* 2 is bottom left
-* 3 is top right
-* 4 is top left
 
-## Usage for local installation 
-To use for local installation, it's a bit more complicated.  
-Download the latest stable/LTS release of VieStatic. (Only download non-stable/non-LTS for cutting edge features)   
-Then move the VieStatic installation into your project. Then embed this code block in the <head> or <body> sections of HTML file:
-```js
-<!-- QR Engine (CDN, required) -->
+### Configuration
+
+#### `data-pos`
+
+Controls the position of the VieStatic button.
+
+| Value | Position     |
+| ----- | ------------ |
+| 1     | Bottom Right |
+| 2     | Bottom Left  |
+| 3     | Top Right    |
+| 4     | Top Left     |
+
+#### `data-url`
+
+Specifies the URL that will be encoded into the QR code.
+
+If left empty, VieStatic will use the current page URL automatically.
+
+---
+
+## Local Installation
+
+1. Download the latest stable release of VieStatic.
+2. Place `viestatic.css` and `viestatic.js` inside your project.
+3. Add the following code to your HTML document:
+
+```html
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 
-<!-- Local VieStatic CSS -->
 <link rel="stylesheet" href="/assets/viestatic.css">
 
-<!-- Local VieStatic JS -->
 <script src="/assets/viestatic.js"
         data-pos="3"
         data-url="">
 </script>
 ```
-(The guide above assumes your VieStatic installation is in /assets, you may change it accordingly. data pos rules still apply)
+
+> This example assumes the files are stored in `/assets`. Adjust the paths as needed.
+
+---
+
+## NPM Installation
+
+```bash
+npm install viestatic
+```
+
+After installation, import VieStatic according to your project's setup.
+
+---
+
+## Features
+
+* Lightweight and framework-independent
+* Simple CDN integration
+* Custom QR code destinations
+* Multiple placement options
+* Mobile-friendly
+* MIT licensed
+
 
 ## A quick tip
 If you want to change the link of the qrcode to something else, change data-url to your desired url. 
