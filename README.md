@@ -42,6 +42,7 @@ Then move the VieStatic installation into your project. Then embed this code blo
 
 ## A quick tip
 If you want to change the link of the qrcode to something else, change data-url to your desired url. 
+Also, VieStatic witll audo adapt to the same font you use for your website.
 
 
 ## Tech stack
